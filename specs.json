@@ -1,0 +1,22 @@
+{
+  "linkset": [
+    {
+      "href": "https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/",
+      "type": "text/html",
+      "rel": "describedby",
+      "title": "RateLimit Header Fields for HTTP"
+    },
+    {
+      "href": "https://www.rfc-editor.org/rfc/rfc9651.html",
+      "type": "text/html",
+      "rel": "describedby",
+      "title": "Structured Field Values for HTTP"
+    },
+    {
+      "href": "https://www.rfc-editor.org/rfc/rfc9110.html#name-retry-after",
+      "type": "text/html",
+      "rel": "related",
+      "title": "HTTP Semantics - Retry-After Header"
+    }
+  ]
+}

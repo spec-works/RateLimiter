@@ -1,0 +1,475 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RateLimitClient</name>
+    </assembly>
+    <members>
+        <member name="T:RateLimitClient.JwtTokenHelper">
+            <summary>
+            Helper class for parsing JWT tokens and extracting claims.
+            This is a simple implementation without full JWT validation.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.JwtTokenHelper.ExtractClaim(System.String,System.String)">
+            <summary>
+            Extracts a claim value from a JWT token without validating the signature.
+            </summary>
+            <param name="token">The JWT token (Bearer token)</param>
+            <param name="claimName">The name of the claim to extract (e.g., "oid", "sub", "email")</param>
+            <returns>The claim value, or null if not found</returns>
+        </member>
+        <member name="M:RateLimitClient.JwtTokenHelper.ExtractOid(System.String)">
+            <summary>
+            Extracts the Object ID (oid) claim from a JWT token.
+            This is commonly used in Azure AD / Microsoft Identity Platform tokens.
+            </summary>
+            <param name="token">The JWT token</param>
+            <returns>The oid claim value, or null if not found</returns>
+        </member>
+        <member name="M:RateLimitClient.JwtTokenHelper.ExtractSub(System.String)">
+            <summary>
+            Extracts the Subject (sub) claim from a JWT token.
+            This is a standard claim representing the user identifier.
+            </summary>
+            <param name="token">The JWT token</param>
+            <returns>The sub claim value, or null if not found</returns>
+        </member>
+        <member name="M:RateLimitClient.JwtTokenHelper.ExtractAllClaims(System.String)">
+            <summary>
+            Extracts all claims from a JWT token.
+            </summary>
+            <param name="token">The JWT token</param>
+            <returns>Dictionary of claim names to values, or empty dictionary on error</returns>
+        </member>
+        <member name="M:RateLimitClient.JwtTokenHelper.CreateSampleToken(System.String,System.String,System.String)">
+            <summary>
+            Creates a sample JWT token for testing purposes.
+            Note: This creates an unsigned token for demonstration only.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitHandler">
+            <summary>
+            HttpMessageHandler that implements HTTP traffic shaping based on rate limit headers
+            according to the IETF draft-ietf-httpapi-ratelimit-headers specification.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHandler.#ctor">
+            <summary>
+            Creates a new RateLimitHandler with default options.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHandler.#ctor(RateLimitClient.RateLimitHandlerOptions)">
+            <summary>
+            Creates a new RateLimitHandler with the specified options.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHandler.#ctor(RateLimitClient.RateLimitHandlerOptions,System.Net.Http.HttpMessageHandler)">
+            <summary>
+            Creates a new RateLimitHandler with the specified options and inner handler.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHandler.SendAsync(System.Net.Http.HttpRequestMessage,System.Threading.CancellationToken)">
+            <summary>
+            Sends an HTTP request with rate limiting applied.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHandler.GetTracker">
+            <summary>
+            Gets the current rate limit tracker for diagnostics.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHandler.ClearState">
+            <summary>
+            Clears all tracked rate limit state.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitHandlerOptions">
+            <summary>
+            Options for configuring the RateLimitHandler behavior.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.WaitMode">
+            <summary>
+            When to apply rate limit delays. Default is BeforeRequest.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.MaxDelayThreshold">
+            <summary>
+            Maximum delay threshold to prevent DoS attacks from excessively high values.
+            Default is 5 minutes.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.EnableProactiveThrottling">
+            <summary>
+            Enable proactive throttling when approaching rate limits.
+            When enabled, requests will be gradually slowed as quota is consumed.
+            Default is true.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.ProactiveThrottleThreshold">
+            <summary>
+            Threshold (0.0 to 1.0) for triggering proactive throttling.
+            Default is 0.8 (80% of quota consumed).
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.StateExpirationTime">
+            <summary>
+            How long rate limit state remains valid without updates.
+            Default is 1 hour.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.AutoRetryOn429">
+            <summary>
+            Automatically retry requests that receive 429 Too Many Requests status.
+            Default is false.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.GetLimitKey">
+            <summary>
+            Custom function to determine the tracking key for a URI.
+            Default tracks by scheme and host (e.g., "https://api.example.com").
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.OnRateLimitHeadersReceived">
+            <summary>
+            Callback invoked when rate limit headers are received and parsed.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.OnDelayCalculated">
+            <summary>
+            Callback invoked when a delay is calculated and applied.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.OnTooManyRequests">
+            <summary>
+            Callback invoked when a 429 Too Many Requests response is received.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHandlerOptions.OnParsingError">
+            <summary>
+            Callback invoked when an error occurs parsing rate limit headers.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitWaitMode">
+            <summary>
+            Specifies when rate limit delays should be applied.
+            </summary>
+        </member>
+        <member name="F:RateLimitClient.RateLimitWaitMode.BeforeRequest">
+            <summary>
+            Wait before sending the request. This prevents sending requests that would be rate limited.
+            </summary>
+        </member>
+        <member name="F:RateLimitClient.RateLimitWaitMode.AfterResponse">
+            <summary>
+            Wait after receiving the response. This ensures rate limit info is applied to subsequent requests.
+            </summary>
+        </member>
+        <member name="F:RateLimitClient.RateLimitWaitMode.Never">
+            <summary>
+            Never wait automatically. The caller is responsible for handling rate limits.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitHeaderParser">
+            <summary>
+            Parses RateLimit-Policy and RateLimit headers according to the structured field list format.
+            Uses IStructuredFieldParser abstraction for parsing, allowing easy replacement with third-party libraries.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHeaderParser.ParseHeaders(System.Net.Http.Headers.HttpResponseHeaders)">
+            <summary>
+            Parses RateLimit-Policy and RateLimit headers from HTTP response headers.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHeaderParser.ParseRateLimitPolicy(System.String)">
+            <summary>
+            Parses a RateLimit-Policy header value.
+            Format: "name";q=100;w=60,"name2";q=200;w=120
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitHeaderParser.ParseRateLimit(System.String,System.DateTimeOffset)">
+            <summary>
+            Parses a RateLimit header value.
+            Format: "name";r=50;t=30,"name2";r=100;t=60
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitPolicy">
+            <summary>
+            Represents a quota policy from the RateLimit-Policy header.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitPolicy.Name">
+            <summary>
+            Policy name/identifier.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitPolicy.Quota">
+            <summary>
+            Quota allocated in quota units (q parameter).
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitPolicy.WindowSeconds">
+            <summary>
+            Time window in seconds (w parameter).
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitPolicy.QuotaUnit">
+            <summary>
+            Quota unit type (qu parameter): "requests", "content-bytes", or "concurrent-requests".
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitPolicy.PartitionKey">
+            <summary>
+            Partition key (pk parameter).
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitInfo">
+            <summary>
+            Represents current rate limit information from the RateLimit header.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitInfo.PolicyName">
+            <summary>
+            Policy name this limit applies to.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitInfo.Remaining">
+            <summary>
+            Remaining quota units (r parameter).
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitInfo.ResetSeconds">
+            <summary>
+            Seconds until quota restoration (t parameter).
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitInfo.PartitionKey">
+            <summary>
+            Partition key (pk parameter).
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitInfo.Timestamp">
+            <summary>
+            Timestamp when this rate limit was received.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitInfo.GetResetTime">
+            <summary>
+            Calculates when the quota will reset based on timestamp and reset seconds.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitInfo.GetTimeUntilReset">
+            <summary>
+            Gets the time remaining until reset, accounting for elapsed time since the header was received.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitHeaders">
+            <summary>
+            Contains parsed rate limit headers from a response.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHeaders.Policies">
+            <summary>
+            Policies from RateLimit-Policy header.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHeaders.Limits">
+            <summary>
+            Current limits from RateLimit header.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHeaders.RetryAfterSeconds">
+            <summary>
+            Retry-After value if present (takes precedence over reset parameter).
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.RateLimitHeaders.Timestamp">
+            <summary>
+            Timestamp when these headers were received.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitTracker">
+            <summary>
+            Tracks rate limit state and calculates delays needed for traffic shaping.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.UpdateFromHeaders(RateLimitClient.RateLimitHeaders,System.Uri)">
+            <summary>
+            Updates the rate limit state based on response headers.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.CalculateDelay(System.Uri)">
+            <summary>
+            Calculates the delay needed before the next request can be sent.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.CalculateDelay(System.Uri,System.String)">
+            <summary>
+            Calculates the delay needed before the next request can be sent for a specific partition.
+            </summary>
+            <param name="requestUri">The request URI</param>
+            <param name="partitionKey">The partition key (e.g., user ID from token)</param>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.WaitForRateLimitAsync(System.Uri,System.Threading.CancellationToken)">
+            <summary>
+            Waits for the calculated delay before allowing the request to proceed.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.WaitForRateLimitAsync(System.Uri,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Waits for the calculated delay before allowing the request to proceed for a specific partition.
+            </summary>
+            <param name="requestUri">The request URI</param>
+            <param name="partitionKey">The partition key (e.g., user ID from token)</param>
+            <param name="cancellationToken">Cancellation token</param>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.CalculateProactiveDelay(RateLimitClient.RateLimitState)">
+            <summary>
+            Calculates proactive delay when approaching rate limit.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.IsStateStale(RateLimitClient.RateLimitState)">
+            <summary>
+            Checks if a rate limit state is stale and should be ignored.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.GetLimitKey(System.Uri)">
+            <summary>
+            Gets the key for tracking rate limits based on URI.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.Clear">
+            <summary>
+            Clears all tracked rate limit state.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.RateLimitTracker.GetCurrentState">
+            <summary>
+            Gets current state for diagnostics.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.RateLimitState">
+            <summary>
+            Represents the tracked state for a rate limit policy.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.StructuredFields.IStructuredFieldParser">
+            <summary>
+            Interface for parsing HTTP structured fields per RFC 9651.
+            This abstraction allows the parsing implementation to be swapped
+            with a third-party library if needed.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.IStructuredFieldParser.ParseList(System.String)">
+            <summary>
+            Parses a structured field list value into individual items with their parameters.
+            Example: "item1";param1=value1,"item2";param2=value2
+            </summary>
+            <param name="headerValue">The header value to parse.</param>
+            <returns>A list of parsed structured field items.</returns>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.IStructuredFieldParser.ParseString(System.String)">
+            <summary>
+            Parses a quoted string value, removing surrounding quotes.
+            Per RFC 9651, strings are delimited with double quotes.
+            </summary>
+            <param name="value">The value to unquote.</param>
+            <returns>The unquoted string value.</returns>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.IStructuredFieldParser.ParseByteSequence(System.String)">
+            <summary>
+            Parses a byte sequence value from structured field format.
+            Per RFC 9651, byte sequences are formatted as :base64data:
+            </summary>
+            <param name="value">The value to parse.</param>
+            <returns>The decoded string value.</returns>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.IStructuredFieldParser.SerializeByteSequence(System.String)">
+            <summary>
+            Serializes a string value as a byte sequence for structured field format.
+            Per RFC 9651, byte sequences are formatted as :base64data:
+            </summary>
+            <param name="value">The string value to serialize.</param>
+            <returns>The serialized byte sequence.</returns>
+        </member>
+        <member name="T:RateLimitClient.StructuredFields.StructuredFieldItem">
+            <summary>
+            Represents a single item from a structured field list with its parameters.
+            Per RFC 9651, an item consists of a bare item and optional parameters.
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.StructuredFields.StructuredFieldItem.Value">
+            <summary>
+            The primary value of this item (typically a string or token).
+            </summary>
+        </member>
+        <member name="P:RateLimitClient.StructuredFields.StructuredFieldItem.Parameters">
+            <summary>
+            Parameters associated with this item as key-value pairs.
+            Per RFC 9651, parameters are an ordered map of key-value pairs.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldItem.GetParameter(System.String)">
+            <summary>
+            Gets a parameter value by key, or null if not found.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldItem.TryGetParameterAsLong(System.String,System.Int64@)">
+            <summary>
+            Tries to get a parameter value and parse it as a long integer.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldItem.TryGetParameterAsInt(System.String,System.Int32@)">
+            <summary>
+            Tries to get a parameter value and parse it as an integer.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldItem.HasParameter(System.String)">
+            <summary>
+            Checks if a parameter exists.
+            </summary>
+        </member>
+        <member name="T:RateLimitClient.StructuredFields.StructuredFieldParser">
+            <summary>
+            Default implementation of structured field parsing per RFC 9651.
+            This implementation can be replaced with a third-party library if needed.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldParser.ParseList(System.String)">
+            <summary>
+            Parses a structured field list value into individual items with their parameters.
+            Format: "item1";param1=value1;param2=value2,"item2";param3=value3
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldParser.ParseString(System.String)">
+            <summary>
+            Parses a quoted string value, removing surrounding quotes.
+            Per RFC 9651, strings are delimited with double quotes.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldParser.ParseByteSequence(System.String)">
+            <summary>
+            Parses a byte sequence value from structured field format.
+            Per RFC 9651, byte sequences are formatted as :base64data:
+            Returns the decoded UTF-8 string value.
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldParser.SerializeByteSequence(System.String)">
+            <summary>
+            Serializes a string value as a byte sequence for structured field format.
+            Per RFC 9651, byte sequences are formatted as :base64data:
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldParser.ParseItem(System.String)">
+            <summary>
+            Parses a single item with its parameters from a raw string.
+            Format: "item";param1=value1;param2=value2
+            </summary>
+        </member>
+        <member name="M:RateLimitClient.StructuredFields.StructuredFieldParser.SplitListItems(System.String)">
+            <summary>
+            Splits a structured field list by commas, respecting quoted strings.
+            </summary>
+        </member>
+    </members>
+</doc>

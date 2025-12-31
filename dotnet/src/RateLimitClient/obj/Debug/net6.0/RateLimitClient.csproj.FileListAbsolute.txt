@@ -1,0 +1,13 @@
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\bin\Debug\net6.0\RateLimitClient.deps.json
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\bin\Debug\net6.0\RateLimitClient.dll
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\bin\Debug\net6.0\RateLimitClient.pdb
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\bin\Debug\net6.0\RateLimitClient.xml
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\RateLimitClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\RateLimitClient.AssemblyInfoInputs.cache
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\RateLimitClient.AssemblyInfo.cs
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\RateLimitClient.csproj.CoreCompileInputs.cache
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\RateLimitClient.dll
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\refint\RateLimitClient.dll
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\RateLimitClient.xml
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\RateLimitClient.pdb
+D:\scratch\claudeCode\RateLimitClient\src\RateLimitClient\obj\Debug\net6.0\ref\RateLimitClient.dll
