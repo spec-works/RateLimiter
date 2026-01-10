@@ -304,8 +304,8 @@ namespace RateLimitClient
     /// </summary>
     public class RateLimitState
     {
-        public string PolicyName { get; set; }
-        public string PartitionKey { get; set; }
+        public string PolicyName { get; set; } = string.Empty;
+        public string PartitionKey { get; set; } = string.Empty;
         public long Remaining { get; set; }
         public DateTimeOffset? ResetTime { get; set; }
         public DateTimeOffset LastUpdated { get; set; }

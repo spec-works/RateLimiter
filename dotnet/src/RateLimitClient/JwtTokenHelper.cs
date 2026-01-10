@@ -18,7 +18,7 @@ namespace RateLimitClient
         /// <param name="token">The JWT token (Bearer token)</param>
         /// <param name="claimName">The name of the claim to extract (e.g., "oid", "sub", "email")</param>
         /// <returns>The claim value, or null if not found</returns>
-        public static string ExtractClaim(string token, string claimName)
+        public static string? ExtractClaim(string token, string claimName)
         {
             if (string.IsNullOrEmpty(token))
                 return null;
@@ -75,7 +75,7 @@ namespace RateLimitClient
         /// </summary>
         /// <param name="token">The JWT token</param>
         /// <returns>The oid claim value, or null if not found</returns>
-        public static string ExtractOid(string token)
+        public static string? ExtractOid(string token)
         {
             return ExtractClaim(token, "oid");
         }
@@ -86,7 +86,7 @@ namespace RateLimitClient
         /// </summary>
         /// <param name="token">The JWT token</param>
         /// <returns>The sub claim value, or null if not found</returns>
-        public static string ExtractSub(string token)
+        public static string? ExtractSub(string token)
         {
             return ExtractClaim(token, "sub");
         }
@@ -145,7 +145,7 @@ namespace RateLimitClient
         /// Creates a sample JWT token for testing purposes.
         /// Note: This creates an unsigned token for demonstration only.
         /// </summary>
-        public static string CreateSampleToken(string oid, string name = null, string email = null)
+        public static string CreateSampleToken(string oid, string? name = null, string? email = null)
         {
             var header = new
             {

@@ -47,7 +47,7 @@ namespace RateLimitClient
         {
             if (request?.RequestUri == null)
             {
-                return await base.SendAsync(request, cancellationToken).ConfigureAwait(false);
+                return await base.SendAsync(request!, cancellationToken).ConfigureAwait(false);
             }
 
             // Wait for rate limit if necessary (before request)
@@ -173,27 +173,27 @@ namespace RateLimitClient
         /// Custom function to determine the tracking key for a URI.
         /// Default tracks by scheme and host (e.g., "https://api.example.com").
         /// </summary>
-        public Func<Uri, string> GetLimitKey { get; set; }
+        public Func<Uri, string>? GetLimitKey { get; set; }
 
         /// <summary>
         /// Callback invoked when rate limit headers are received and parsed.
         /// </summary>
-        public Action<Uri, RateLimitHeaders> OnRateLimitHeadersReceived { get; set; }
+        public Action<Uri, RateLimitHeaders>? OnRateLimitHeadersReceived { get; set; }
 
         /// <summary>
         /// Callback invoked when a delay is calculated and applied.
         /// </summary>
-        public Action<Uri, TimeSpan> OnDelayCalculated { get; set; }
+        public Action<Uri, TimeSpan>? OnDelayCalculated { get; set; }
 
         /// <summary>
         /// Callback invoked when a 429 Too Many Requests response is received.
         /// </summary>
-        public Action<HttpRequestMessage, HttpResponseMessage> OnTooManyRequests { get; set; }
+        public Action<HttpRequestMessage, HttpResponseMessage>? OnTooManyRequests { get; set; }
 
         /// <summary>
         /// Callback invoked when an error occurs parsing rate limit headers.
         /// </summary>
-        public Action<Uri, Exception> OnParsingError { get; set; }
+        public Action<Uri, Exception>? OnParsingError { get; set; }
     }
 
     /// <summary>
