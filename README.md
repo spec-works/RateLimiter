@@ -1,6 +1,6 @@
 # RateLimiter
 
-.NET HTTP handler for client-side rate limiting and traffic shaping based on HTTP rate limit headers.
+Software component for client-side rate limiting and traffic shaping based on HTTP rate limit headers.
 
 ## Specification
 
@@ -8,9 +8,9 @@ Implements [draft-ietf-httpapi-ratelimit-headers](https://datatracker.ietf.org/d
 
 See [specs.json](specs.json) for complete specification references.
 
-## Implementation
+## Implementations
 
-- [.NET](dotnet/README.md) - Full documentation, API reference, and examples
+- [.NET](dotnet/README.md) - Library
 
 ## License
 
