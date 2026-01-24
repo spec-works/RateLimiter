@@ -17,6 +17,11 @@
       "type": "text/html",
       "rel": "related",
       "title": "HTTP Semantics - Retry-After Header"
+    },
+    {
+      "rel": "registry",
+      "title": "Part registry entry",
+      "href": "https://spec-works.github.io/registry/parts/ratelimiter/"
     }
   ]
 }
