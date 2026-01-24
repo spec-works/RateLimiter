@@ -1,0 +1,13 @@
+# DocFX build outputs
+_site/
+obj/
+api/
+*.manifest
+
+# Logs
+log/
+*.log
+
+# Temporary files
+*.tmp
+*~
