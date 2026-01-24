@@ -1,4 +1,6 @@
 # RateLimiter
+[![Registry](https://img.shields.io/badge/Registry-SpecWorks-blue)](https://spec-works.github.io/registry/parts/ratelimiter/)
+
 
 Software component for client-side rate limiting and traffic shaping based on HTTP rate limit headers.
 
