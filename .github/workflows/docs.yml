@@ -19,6 +19,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Download shared template
+        run: |
+          curl -L -o template.zip https://github.com/spec-works/spec-works.github.io/archive/refs/heads/main.zip
+          unzip -q template.zip
+          mkdir -p docs/template
+          cp -r spec-works.github.io-main/docs/template/* docs/template/
+          rm -rf spec-works.github.io-main template.zip
+
+
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
