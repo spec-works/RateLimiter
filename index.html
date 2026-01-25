@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <title>RateLimitClient Documentation | RateLimitClient Documentation </title>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="title" content="RateLimitClient Documentation | RateLimitClient Documentation ">
+      
+      
+      <link rel="icon" href="images/logo.svg">
+      <link rel="stylesheet" href="public/docfx.min.css">
+      <link rel="stylesheet" href="public/main.css">
+      <meta name="docfx:navrel" content="toc.html">
+      <meta name="docfx:tocrel" content="toc.html">
+      
+      <meta name="docfx:rel" content="">
+      
+      
+      <meta name="docfx:docurl" content="https://github.com/spec-works/RateLimiter/blob/main/docs/index.md/#L1">
+      <meta name="loc:inThisArticle" content="In this article">
+      <meta name="loc:searchResultsCount" content="{count} results for &quot;{query}&quot;">
+      <meta name="loc:searchNoResults" content="No results for &quot;{query}&quot;">
+      <meta name="loc:tocFilter" content="Filter by title">
+      <meta name="loc:nextArticle" content="Next">
+      <meta name="loc:prevArticle" content="Previous">
+      <meta name="loc:themeLight" content="Light">
+      <meta name="loc:themeDark" content="Dark">
+      <meta name="loc:themeAuto" content="Auto">
+      <meta name="loc:changeTheme" content="Change theme">
+      <meta name="loc:copy" content="Copy">
+      <meta name="loc:downloadPdf" content="Download PDF">
+
+      <script type="module" src="./public/docfx.min.js"></script>
+
+      <script>
+        const theme = localStorage.getItem('theme') || 'auto'
+        document.documentElement.setAttribute('data-bs-theme', theme === 'auto' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : theme)
+      </script>
+
+  </head>
+
+  <body class="tex2jax_ignore" data-layout="" data-yaml-mime="">
+    <header class="bg-body border-bottom">
+      <nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+        <div class="container-xxl flex-nowrap">
+          <a class="navbar-brand" href="index.html">
+            <img id="logo" class="svg" src="images/logo.svg" alt="RateLimitClient">
+            RateLimitClient
+          </a>
+          <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="bi bi-three-dots"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navpanel">
+            <div id="navbar">
+              <form class="search" role="search" id="search">
+                <i class="bi bi-search"></i>
+                <input class="form-control" id="search-query" type="search" disabled placeholder="Search" autocomplete="off" aria-label="Search">
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container-xxl">
+
+      <div class="content">
+        <div class="actionbar">
+
+          <nav id="breadcrumb"></nav>
+        </div>
+
+        <article data-uid="">
+<h1 id="ratelimitclient-documentation">RateLimitClient Documentation</h1>
+
+<p>Client-side rate limiting based on HTTP headers according to <a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/">draft-ietf-httpapi-ratelimit-headers</a>.</p>
+<h2 id="what-is-ratelimitclient">What is RateLimitClient?</h2>
+<p>RateLimitClient is a .NET library that provides client-side rate limiting functionality based on standardized HTTP rate limit headers. It automatically tracks and respects rate limits returned by APIs, preventing your application from exceeding rate limits and handling backoff strategies.</p>
+<h2 id="installation">Installation</h2>
+<p>Install via NuGet:</p>
+<pre><code class="lang-bash">dotnet add package RateLimitClient
+</code></pre>
+<h2 id="features">Features</h2>
+<ul>
+<li>✅ <strong>Standards-Based</strong> - Implements draft-ietf-httpapi-ratelimit-headers</li>
+<li>✅ <strong>Automatic Tracking</strong> - Tracks rate limits per API endpoint</li>
+<li>✅ <strong>Smart Backoff</strong> - Automatically delays requests when limits are approached</li>
+<li>✅ <strong>HttpClient Integration</strong> - Seamless integration with HttpClient via DelegatingHandler</li>
+<li>✅ <strong>Multiple Rate Limit Policies</strong> - Supports multiple concurrent rate limit windows</li>
+<li>✅ <strong>Thread-Safe</strong> - Safe for concurrent requests</li>
+<li>✅ <strong>Type-Safe API</strong> - Strong typing with nullable reference types</li>
+<li>✅ <strong>Multi-Target</strong> - Supports .NET 10.0 and .NET 8.0 (LTS)</li>
+</ul>
+<h2 id="quick-start">Quick Start</h2>
+<h3 id="basic-usage">Basic Usage</h3>
+<pre><code class="lang-csharp">using RateLimitClient;
+
+// Create HttpClient with rate limiting
+var handler = new RateLimitHandler();
+var httpClient = new HttpClient(handler)
+{
+    BaseAddress = new Uri(&quot;https://api.example.com&quot;)
+};
+
+// Make requests - rate limiting happens automatically
+var response = await httpClient.GetAsync(&quot;/api/data&quot;);
+
+// The handler automatically:
+// - Parses RateLimit-* headers from responses
+// - Tracks remaining quota
+// - Delays requests when limits are approached
+// - Handles 429 Too Many Requests responses
+</code></pre>
+<h3 id="advanced-configuration">Advanced Configuration</h3>
+<pre><code class="lang-csharp">using RateLimitClient;
+
+// Configure rate limit behavior
+var options = new RateLimitOptions
+{
+    // Percentage of quota at which to start delaying requests (default: 0.8)
+    ThrottleThreshold = 0.8,
+
+    // Maximum time to wait before request (default: 60 seconds)
+    MaxDelay = TimeSpan.FromSeconds(60),
+
+    // Enable automatic retry on 429 (default: true)
+    AutoRetryOn429 = true,
+
+    // Maximum retry attempts (default: 3)
+    MaxRetryAttempts = 3
+};
+
+var handler = new RateLimitHandler(options);
+var httpClient = new HttpClient(handler);
+</code></pre>
+<h3 id="manual-rate-limit-checking">Manual Rate Limit Checking</h3>
+<pre><code class="lang-csharp">using RateLimitClient;
+
+var handler = new RateLimitHandler();
+var httpClient = new HttpClient(handler);
+
+// Make a request
+await httpClient.GetAsync(&quot;/api/data&quot;);
+
+// Check current rate limit status
+var tracker = handler.GetTracker(new Uri(&quot;https://api.example.com/api/data&quot;));
+if (tracker != null)
+{
+    Console.WriteLine($&quot;Remaining: {tracker.Remaining}&quot;);
+    Console.WriteLine($&quot;Limit: {tracker.Limit}&quot;);
+    Console.WriteLine($&quot;Reset: {tracker.ResetTime}&quot;);
+}
+</code></pre>
+<h2 id="use-cases">Use Cases</h2>
+<h3 id="api-client-libraries">API Client Libraries</h3>
+<p>Build robust API clients that respect rate limits:</p>
+<pre><code class="lang-csharp">public class MyApiClient
+{
+    private readonly HttpClient _httpClient;
+
+    public MyApiClient()
+    {
+        var handler = new RateLimitHandler();
+        _httpClient = new HttpClient(handler)
+        {
+            BaseAddress = new Uri(&quot;https://api.example.com&quot;)
+        };
+    }
+
+    public async Task&lt;Data&gt; GetDataAsync()
+    {
+        // Rate limiting handled automatically
+        var response = await _httpClient.GetAsync(&quot;/api/data&quot;);
+        return await response.Content.ReadFromJsonAsync&lt;Data&gt;();
+    }
+}
+</code></pre>
+<h3 id="bulk-operations">Bulk Operations</h3>
+<p>Handle bulk operations without hitting rate limits:</p>
+<pre><code class="lang-csharp">var handler = new RateLimitHandler(new RateLimitOptions
+{
+    ThrottleThreshold = 0.9, // Use 90% of quota before throttling
+    AutoRetryOn429 = true
+});
+
+var httpClient = new HttpClient(handler);
+
+// Process many items - rate limiting prevents 429 errors
+foreach (var item in items)
+{
+    await httpClient.PostAsJsonAsync(&quot;/api/items&quot;, item);
+    // Automatically delays when approaching rate limit
+}
+</code></pre>
+<h3 id="multi-tenant-applications">Multi-Tenant Applications</h3>
+<p>Track rate limits per tenant:</p>
+<pre><code class="lang-csharp">// Each tenant gets their own rate-limited client
+public class TenantClientFactory
+{
+    private readonly Dictionary&lt;string, HttpClient&gt; _clients = new();
+
+    public HttpClient GetClient(string tenantId)
+    {
+        if (!_clients.ContainsKey(tenantId))
+        {
+            var handler = new RateLimitHandler();
+            _clients[tenantId] = new HttpClient(handler);
+        }
+
+        return _clients[tenantId];
+    }
+}
+</code></pre>
+<h2 id="api-reference">API Reference</h2>
+<ul>
+<li><a href="api/RateLimitClient.html">API Documentation</a> - Complete API reference</li>
+</ul>
+<h2 id="specification-compliance">Specification Compliance</h2>
+<p>This library implements <a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/">draft-ietf-httpapi-ratelimit-headers - RateLimit header fields for HTTP</a>.</p>
+<h3 id="supported-headers">Supported Headers</h3>
+<table>
+<thead>
+<tr>
+<th>Header</th>
+<th>Description</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>RateLimit-Limit</td>
+<td>Maximum requests in window</td>
+<td>✅ Supported</td>
+</tr>
+<tr>
+<td>RateLimit-Remaining</td>
+<td>Remaining requests in window</td>
+<td>✅ Supported</td>
+</tr>
+<tr>
+<td>RateLimit-Reset</td>
+<td>Time until window resets</td>
+<td>✅ Supported</td>
+</tr>
+<tr>
+<td>RateLimit-Policy</td>
+<td>Rate limit policy details</td>
+<td>✅ Supported</td>
+</tr>
+<tr>
+<td>Retry-After</td>
+<td>Time to wait before retry</td>
+<td>✅ Supported</td>
+</tr>
+</tbody>
+</table>
+<h3 id="header-formats">Header Formats</h3>
+<p>The library supports both standard formats:</p>
+<pre><code class="lang-http">RateLimit-Limit: 100
+RateLimit-Remaining: 50
+RateLimit-Reset: 60
+</code></pre>
+<p>And structured field format:</p>
+<pre><code class="lang-http">RateLimit: limit=100, remaining=50, reset=60
+</code></pre>
+<h2 id="how-it-works">How It Works</h2>
+<h3 id="rate-limit-tracking">Rate Limit Tracking</h3>
+<ol>
+<li><strong>Header Parsing</strong>: Automatically parses rate limit headers from API responses</li>
+<li><strong>Quota Tracking</strong>: Maintains current quota state per endpoint</li>
+<li><strong>Threshold Detection</strong>: Monitors when quota falls below threshold</li>
+<li><strong>Automatic Delays</strong>: Calculates and applies appropriate delays</li>
+<li><strong>Reset Handling</strong>: Automatically resets quotas when windows expire</li>
+</ol>
+<h3 id="backoff-strategy">Backoff Strategy</h3>
+<p>When approaching rate limits:</p>
+<ol>
+<li>Calculate time until reset</li>
+<li>Calculate delay based on remaining quota and threshold</li>
+<li>Delay request if necessary</li>
+<li>Retry with exponential backoff on 429 responses</li>
+</ol>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>.NET 10.0 or .NET 8.0 (LTS)</li>
+<li>C# 10.0 or later</li>
+</ul>
+<h2 id="source-code">Source Code</h2>
+<p>View the source code on <a href="https://github.com/spec-works/RateLimiter">GitHub</a>.</p>
+<h2 id="contributing">Contributing</h2>
+<p>Contributions welcome! See the <a href="https://github.com/spec-works/RateLimiter">repository</a> for:</p>
+<ul>
+<li>Issue tracking</li>
+<li>Pull request guidelines</li>
+<li>Architecture Decision Records (ADRs)</li>
+</ul>
+<h2 id="license">License</h2>
+<p>MIT License - see <a href="https://github.com/spec-works/RateLimiter/blob/main/LICENSE">LICENSE</a> for details.</p>
+<h2 id="links">Links</h2>
+<ul>
+<li><strong>GitHub Repository</strong>: <a href="https://github.com/spec-works/RateLimiter">github.com/spec-works/RateLimiter</a></li>
+<li><strong>Specification</strong>: <a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-ratelimit-headers/">draft-ietf-httpapi-ratelimit-headers</a></li>
+<li><strong>SpecWorks Factory</strong>: <a href="https://spec-works.github.io">spec-works.github.io</a></li>
+</ul>
+
+</article>
+
+        <div class="contribution d-print-none">
+          <a href="https://github.com/spec-works/RateLimiter/blob/main/docs/index.md/#L1" class="edit-link">Edit this page</a>
+        </div>
+
+        <div class="next-article d-print-none border-top" id="nextArticle"></div>
+
+      </div>
+
+      <div class="affix">
+        <nav id="affix"></nav>
+      </div>
+    </main>
+
+    <div class="container-xxl search-results" id="search-results"></div>
+
+    <footer class="border-top text-secondary">
+      <div class="container-xxl">
+        <div class="flex-fill">
+          <a href='https://spec-works.github.io/'>SpecWorks Factory</a> | <a href='https://github.com/spec-works/RateLimiter'>GitHub</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
