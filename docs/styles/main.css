@@ -7,12 +7,8 @@
   gap: 5px;
 }
 
-.navbar-brand img {
-  padding-right: 5px;
-}
-
-.navbar-brand > img#logo {
-  display: block;
+a.navbar-brand > img#logo {
+  padding-right: 5px !important;
 }
 
 /* Ensure navigation items are vertically aligned */
