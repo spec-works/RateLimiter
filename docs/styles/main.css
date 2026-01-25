@@ -11,6 +11,10 @@
   margin-right: 5px;
 }
 
+.site-logo img {
+  margin-right: 5px;
+}
+
 /* Ensure navigation items are vertically aligned */
 .navbar-nav {
   align-items: center;
