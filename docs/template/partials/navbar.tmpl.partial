@@ -1,0 +1,18 @@
+{{!Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. See LICENSE file in the project root for full license information.}}
+
+<nav id="autocollapse" class="navbar navbar-expand-md" role="navigation">
+  <div class="container-xxl flex-nowrap">
+    <a class="navbar-brand" href="{{{_appLogoUrl}}}">
+      {{#_appLogoPath}}<img id="logo" src="{{{_rel}}}{{{_appLogoPath}}}" alt="{{_appName}}">{{/_appLogoPath}}
+      <span class="brand-text">{{_appName}}</span>
+    </a>
+    <button class="btn btn-lg d-md-none border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navpanel" aria-controls="navpanel" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-three-dots"></i>
+    </button>
+    <div class="collapse navbar-collapse" id="navpanel">
+      <div id="navbar">
+        {{>partials/navbar}}
+      </div>
+    </div>
+  </div>
+</nav>
