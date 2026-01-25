@@ -2,17 +2,13 @@
 
 /* Logo and branding alignment */
 .navbar-brand {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 20px; /* Increased spacing between logo and text */
+  gap: 5px;
 }
 
-.navbar-brand img {
-  margin-right: 5px;
-}
-
-.site-logo img {
-  margin-right: 5px;
+.navbar-brand > img#logo {
+  display: block;
 }
 
 /* Ensure navigation items are vertically aligned */
