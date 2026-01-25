@@ -7,6 +7,10 @@
   gap: 5px;
 }
 
+.navbar-brand img {
+  padding-right: 5px;
+}
+
 .navbar-brand > img#logo {
   display: block;
 }
