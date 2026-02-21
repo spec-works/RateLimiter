@@ -1,0 +1,27 @@
+[
+  {
+    "comment": "Basic RateLimit header with remaining quota",
+    "input": "\"default\";r=999",
+    "expected": {
+      "policyName": "default",
+      "remaining": 999
+    }
+  },
+  {
+    "comment": "RateLimit header with partition key (byte sequence)",
+    "input": "\"default\";r=999;pk=:dHJpYWwxMjEzMjM=:",
+    "expected": {
+      "policyName": "default",
+      "remaining": 999,
+      "partitionKey": "dHJpYWwxMjEzMjM="
+    }
+  },
+  {
+    "comment": "RateLimit header with zero remaining",
+    "input": "\"default\";r=0",
+    "expected": {
+      "policyName": "default",
+      "remaining": 0
+    }
+  }
+]
