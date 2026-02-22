@@ -1,0 +1,37 @@
+[
+  {
+    "comment": "Single policy with quota and window",
+    "input": "\"peruser\";q=100;w=60",
+    "expected": {
+      "policyName": "peruser",
+      "quota": 100,
+      "window": 60
+    }
+  },
+  {
+    "comment": "Policy with partition key (byte sequence)",
+    "input": "\"peruser\";q=100;w=60;pk=:cHsdsRa894==:",
+    "expected": {
+      "policyName": "peruser",
+      "quota": 100,
+      "window": 60,
+      "partitionKey": "cHsdsRa894=="
+    }
+  },
+  {
+    "comment": "Multiple policies (burst and hourly)",
+    "input": "\"burst\";q=100;w=60,\"hourly\";q=1000;w=3600",
+    "expected": [
+      {
+        "policyName": "burst",
+        "quota": 100,
+        "window": 60
+      },
+      {
+        "policyName": "hourly",
+        "quota": 1000,
+        "window": 3600
+      }
+    ]
+  }
+]

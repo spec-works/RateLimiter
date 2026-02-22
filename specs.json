@@ -19,6 +19,18 @@
       "title": "HTTP Semantics - Retry-After Header"
     },
     {
+      "href": "https://github.com/spec-works/RateLimiter/tree/main/testcases",
+      "rel": "https://specworks.org/rels/tests",
+      "type": "text/html",
+      "title": "Shared test cases"
+    },
+    {
+      "href": "https://github.com/spec-works/RateLimiter/actions",
+      "rel": "https://specworks.org/rels/tests",
+      "type": "text/html",
+      "title": "CI Test Results"
+    },
+    {
       "rel": "registry",
       "title": "Part registry entry",
       "href": "https://spec-works.github.io/registry/parts/ratelimiter/"

@@ -226,6 +226,10 @@ When approaching rate limits:
 - .NET 10.0 or .NET 8.0 (LTS)
 - C# 10.0 or later
 
+## Test Cases
+
+All implementations are validated against shared, language-independent test cases in the [testcases/](https://github.com/spec-works/RateLimiter/tree/main/testcases) directory, covering RateLimit headers, RateLimit-Policy headers, and RFC 9651 structured field value parsing.
+
 ## Source Code
 
 View the source code on [GitHub](https://github.com/spec-works/RateLimiter).

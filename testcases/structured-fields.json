@@ -1,0 +1,39 @@
+[
+  {
+    "comment": "Single item with string value",
+    "input": "\"test\"",
+    "expected": {
+      "value": "test",
+      "type": "string"
+    }
+  },
+  {
+    "comment": "Item with numeric parameters",
+    "input": "\"item\";q=100;w=60",
+    "expected": {
+      "value": "item",
+      "parameters": {
+        "q": 100,
+        "w": 60
+      }
+    }
+  },
+  {
+    "comment": "Byte sequence value",
+    "input": ":dXNlci0xMjM0NQ==:",
+    "expected": {
+      "value": "user-12345",
+      "type": "byte-sequence",
+      "encoded": "dXNlci0xMjM0NQ=="
+    }
+  },
+  {
+    "comment": "List with multiple items",
+    "input": "\"item1\",\"item2\",\"item3\"",
+    "expected": [
+      { "value": "item1" },
+      { "value": "item2" },
+      { "value": "item3" }
+    ]
+  }
+]

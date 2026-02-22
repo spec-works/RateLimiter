@@ -14,6 +14,10 @@ See [specs.json](specs.json) for complete specification references.
 
 - **[.NET Library](dotnet/README.md)** - ![.NET Test](https://github.com/spec-works/RateLimiter/workflows/.NET%20Test/badge.svg)
 
+## Test Cases
+
+Shared, language-independent test cases are in [testcases/](testcases/).
+
 ## License
 
 MIT License
