@@ -1,0 +1,275 @@
+{
+  "source_base_path": "/home/runner/work/RateLimiter/RateLimiter/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.JwtTokenHelper.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.JwtTokenHelper.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.JwtTokenHelper",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.JwtTokenHelper.yml\" sourcestartlinenumber=\"1\">Helper class for parsing JWT tokens and extracting claims.\nThis is a simple implementation without full JWT validation.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitHandler.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitHandler",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitHandler.yml\" sourcestartlinenumber=\"1\">HttpMessageHandler that implements HTTP traffic shaping based on rate limit headers\naccording to the IETF draft-ietf-httpapi-ratelimit-headers specification.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitHandlerOptions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitHandlerOptions.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitHandlerOptions",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitHandlerOptions.yml\" sourcestartlinenumber=\"1\">Options for configuring the RateLimitHandler behavior.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitHeaderParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitHeaderParser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitHeaderParser",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitHeaderParser.yml\" sourcestartlinenumber=\"1\">Parses RateLimit-Policy and RateLimit headers according to the structured field list format.\nUses IStructuredFieldParser abstraction for parsing, allowing easy replacement with third-party libraries.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitHeaders.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitHeaders.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitHeaders",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitHeaders.yml\" sourcestartlinenumber=\"1\">Contains parsed rate limit headers from a response.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitInfo.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitInfo.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitInfo",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitInfo.yml\" sourcestartlinenumber=\"1\">Represents current rate limit information from the RateLimit header.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitPolicy.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitPolicy.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitPolicy",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitPolicy.yml\" sourcestartlinenumber=\"1\">Represents a quota policy from the RateLimit-Policy header.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitState.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitState",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitState.yml\" sourcestartlinenumber=\"1\">Represents the tracked state for a rate limit policy.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitTracker.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitTracker.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitTracker",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitTracker.yml\" sourcestartlinenumber=\"1\">Tracks rate limit state and calculates delays needed for traffic shaping.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.RateLimitWaitMode.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.RateLimitWaitMode.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.RateLimitWaitMode",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.RateLimitWaitMode.yml\" sourcestartlinenumber=\"1\">Specifies when rate limit delays should be applied.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.StructuredFields.IStructuredFieldParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.StructuredFields.IStructuredFieldParser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.StructuredFields.IStructuredFieldParser",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.StructuredFields.IStructuredFieldParser.yml\" sourcestartlinenumber=\"1\">Interface for parsing HTTP structured fields per RFC 9651.\nThis abstraction allows the parsing implementation to be swapped\nwith a third-party library if needed.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.StructuredFields.StructuredFieldItem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.StructuredFields.StructuredFieldItem.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.StructuredFields.StructuredFieldItem",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.StructuredFields.StructuredFieldItem.yml\" sourcestartlinenumber=\"1\">Represents a single item from a structured field list with its parameters.\nPer RFC 9651, an item consists of a bare item and optional parameters.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.StructuredFields.StructuredFieldParser.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.StructuredFields.StructuredFieldParser.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.StructuredFields.StructuredFieldParser",
+      "Summary": "<p sourcefile=\"api/RateLimitClient.StructuredFields.StructuredFieldParser.yml\" sourcestartlinenumber=\"1\">Default implementation of structured field parsing per RFC 9651.\nThis implementation can be replaced with a third-party library if needed.</p>\n"
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.StructuredFields.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.StructuredFields.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient.StructuredFields",
+      "Summary": null
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "api/RateLimitClient.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/RateLimitClient.html"
+        }
+      },
+      "version": "",
+      "Uid": null,
+      "IsMRef": true,
+      "Title": "RateLimitClient",
+      "Summary": null
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/logo.svg",
+      "output": {
+        "resource": {
+          "relative_path": "images/logo.svg"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}
